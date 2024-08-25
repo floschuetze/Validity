@@ -127,7 +127,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
     t <- mean(apply((w * g * g / k), 2, mean))
     
     # Reshape to a 3D array (100x1x1000)
-    R <- array((Y - F), dim = c(100, 1, 1000))
+    R <- array((Y - F), dim = c(n, 1, N))
     #####hier#####
     
     #D ist gesampelt, achtung!
