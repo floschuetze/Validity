@@ -183,8 +183,21 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
     p = 1
   }else{
     p <- 1 - sum(T <= t) / N}
-  return(list(P = p, T = T, t = t))
+  #return(list(P-Value= p , t-Value = t))
+  message1 <- "The validity test was successfully completed."
+  message2 <- "H0: The model is considerd to be valid."
+  message3 <- "H1: The model is not considered to be valid."
   
+  
+  # Ergebnisse anzeigen
+  cat(message1, "\n")
+  cat(message2, "\n")
+  cat(message3, "\n")
+  cat("t-Value:", t, "\n")
+  cat("p-Value:", p, "\n")
+  
+  # Optionale Rückgabe der Werte
+  return(list(t_value = t, p_value = p))
 }
 
 reg<-function(y, X) {
