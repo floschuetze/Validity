@@ -7,10 +7,10 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
   # X (n x m) - regressors
   # reg (@)   - regression function delifering fitted values
   # v (1 x 1) - version of the test
-  # v == 0: Frahm-Sch?tze
+  # v == 0: Frahm-Schütze
   # v == 1: Stute
   # s (1 x 1) - test statistic (only relevant if v == 1)
-  # s == 0: Cram?r-von-Mises
+  # s == 0: Cramer-von-Mises
   # s == 1: Kolmogorov-Smirnov
   # The choice of s does not matter for v = 0.
   # l (1 x 1) - weight on the left of [0,1]
@@ -20,7 +20,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
   # Output:
   # p (1 x 1) - p-value
   # t (1 x 1) - test statistic
-  #Florian Sch?tze 08/2024 based on Gabriel Frahm 02.06.2024
+  #Florian Schütze 08/2024 based on Gabriel Frahm 02.06.2024
   
   if (missing(v)) v <- 0
   if (missing(s)) s <- 0
