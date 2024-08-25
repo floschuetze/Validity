@@ -26,6 +26,8 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
   if (missing(s)) s <- 0
   if (missing(l)) l <- 0
   if (missing(r)) r <- 0
+  if (missing(reg)) reg <- reg
+  
   N <- 1000
   X<-as.matrix(X)
   n <- nrow(X)
