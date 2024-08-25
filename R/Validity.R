@@ -26,7 +26,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
   if (missing(s)) s <- 0
   if (missing(l)) l <- 0
   if (missing(r)) r <- 0
-  if (missing(reg)) reg <- <-function(y, X) {
+  if (missing(reg)) reg <-function(y, X) {
     d<-data.frame(X,y1=y)
     model <- lm(y1 ~ ., data = d)
     return(model$fitted.values)
