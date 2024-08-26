@@ -4,12 +4,14 @@
 \alias{Example1}
 \title{The first example of Frahm (2023)}
 \usage{
-Example1(c, n)
+Example1(c, n, tau)
 }
 \arguments{
 \item{c}{A constant}
 
 \item{n}{The number of observations}
+
+\item{tau}{(optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ}
 }
 \value{
 The function returns the p-value of the validity test.

@@ -227,12 +227,13 @@ reg<-function(y, X) {
   return(model$fitted.values)
 }
 
-Example1 <- function(c,n) {
+Example1 <- function(c,n,tau) {
   #' The first example of Frahm (2023)
   #'
   #' This function replicates the first example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
+  #' @param tau (optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example1(0.25,100)
@@ -240,20 +241,24 @@ Example1 <- function(c,n) {
   #' @references 
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'@export
+  
+  if (missing(tau)) tau <- 1
   x <- rnorm(n, mean=0, sd=1)
-  y <- rnorm(n, mean=0, sd=1)
+  y <- rnorm(n, mean=0, sd=tau)
   y[which(x>0)]<- y[which(x>0)]+c
   y[which(x<=0)]<- y[which(x<=0)]-c
   p<-validity(x,y)
   return(p)
 }
 
-Example2 <- function(c,n) {
+Example2 <- function(c,n,tau) {
   #' The second example of Frahm (2023)
   #'
   #' This function replicates the second example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
+  #' @param tau (optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ
+
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example2(0.25,100)
@@ -261,18 +266,21 @@ Example2 <- function(c,n) {
   #' @references 
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'@export
+  
+if (missing(tau)) tau <- 1
   x <- rnorm(n, mean=0, sd=1)
-  y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=1)
+  y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=tau)
   p<-validity(x,y)
   return(p)
 }
 
-Example3 <- function(c,n) {
+Example3 <- function(c,n,tau) {
   #' The third example of Frahm (2023)
   #'
   #' This function replicates the third example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
+  #' @param tau (optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example3(0.25,100)
@@ -280,11 +288,13 @@ Example3 <- function(c,n) {
   #' @references 
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'@export
+  
+  if (missing(tau)) tau <- 1
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
   mu<-c(0, 0) 
   LK<-as.matrix(mvrnorm(n=n, mu=mu, Sigma=sigma))
-  y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=1)
+  y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=tau)
   p<-validity(LK,y)
   return(p)
 }
