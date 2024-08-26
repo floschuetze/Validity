@@ -4,7 +4,7 @@
 \alias{validity}
 \title{Test for the Validity of Regression Models}
 \usage{
-validity(y, X, reg, v = 0, s = 0, l = 0, r = 0)
+validity(y, X, reg, v = 0, s = 0, l = 0, r = 0, N = 1000)
 }
 \arguments{
 \item{y}{Dependent variable, vector of (nx1)}
@@ -13,14 +13,17 @@ validity(y, X, reg, v = 0, s = 0, l = 0, r = 0)
 
 \item{reg}{(optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example.}
 
-\item{v}{(optional, default is v=0) v=0: Validity-Test from Frahm, G.,2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
-v=1: Test from Stute,W.,1997, Nonparametric model checks for regression, The Annals of Statistics 25, pp. 613 to 641.}
+\item{v}{(optional, default is v = 0) v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
 
-\item{s}{(optional, default is s=0) s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1}
+v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.}
 
-\item{l}{(optional, default is l=0) Controls how much weight is given to the left side of [0,1] of the beta distribution}
+\item{s}{(optional, default is s = 0) s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1}
 
-\item{r}{(optional, default is r=0) Controls how much weight is given to the right side of [0,1] of the beta distribution}
+\item{l}{(optional, default is l = 0) Controls how much weight is given to the left side of [0,1] of the beta distribution}
+
+\item{r}{(optional, default is r = 0) Controls how much weight is given to the right side of [0,1] of the beta distribution}
+
+\item{N}{(optional, default is N = 1000) The number of bootstrap replicates. Code may run faster if N<1000}
 }
 \value{
 The function returns the hypothesis to be tested. The t-value and p-value are also returned
@@ -45,7 +48,7 @@ validity(y,x)
 \references{
 Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
 
-Stute,W.,1997, Nonparametric model checks for regression, The Annals of Statistics 25, pp. 613 to 641.
+Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
 }
 \author{
 Florian Schuetze 26.08.2024

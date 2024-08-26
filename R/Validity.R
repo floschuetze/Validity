@@ -1,15 +1,18 @@
-validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
+validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
   #' Test for the Validity of Regression Models 
   #'
   #' It tests if a regression is valid. A specific regression can be specified for this, otherwise OLS is the default option.
   #' @param y Dependent variable, vector of (nx1)
   #' @param X Regressors, can be either a vector (nx1) or a matrix (nxm) if there is more than one regressor
   #' @param reg (optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example.
-  #' @param v (optional, default is v=0) v=0: Validity-Test from Frahm, G.,2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
-  #' v=1: Test from Stute,W.,1997, Nonparametric model checks for regression, The Annals of Statistics 25, pp. 613 to 641.
-  #' @param s (optional, default is s=0) s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1
-  #' @param l (optional, default is l=0) Controls how much weight is given to the left side of [0,1] of the beta distribution
-  #' @param r (optional, default is r=0) Controls how much weight is given to the right side of [0,1] of the beta distribution
+  #' @param v (optional, default is v = 0) v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' 
+  #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
+  #' @param s (optional, default is s = 0) s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1
+  #' @param l (optional, default is l = 0) Controls how much weight is given to the left side of [0,1] of the beta distribution
+  #' @param r (optional, default is r = 0) Controls how much weight is given to the right side of [0,1] of the beta distribution
+  #' @param N (optional, default is N = 1000) The number of bootstrap replicates. Code may run faster if N<1000
+
   #' @details The "validity" function represents the fundamental component of the package. It performs a statistical test with the objective of determining the validity of a regression model that requires a dependent variable, which is represented as a vector of length "n". Additionally, it requires the regressors, which could be a vector or a matrix of length "m*n". By default, an OLS regression is run using a constant and all regressors to explain y. 
   #' @return The function returns the hypothesis to be tested. The t-value and p-value are also returned
   #' @examples It is evident that the model "y=constant+beta*x" is valid.
@@ -24,7 +27,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
   #' @references 
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'
-  #'Stute,W.,1997, Nonparametric model checks for regression, The Annals of Statistics 25, pp. 613 to 641.
+  #'Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @author Florian Schuetze 26.08.2024
    #  Test for the validity of a regression model.
   # ---
@@ -52,13 +55,13 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0) {
   if (missing(s)) s <- 0
   if (missing(l)) l <- 0
   if (missing(r)) r <- 0
+  if (missing(r)) N <- 1000
   if (missing(reg)) reg <-function(y, X) {
     d<-data.frame(X,y1=y)
     model <- lm(y1 ~ ., data = d)
     return(model$fitted.values)
   }
   
-  N <- 1000
   X<-as.matrix(X)
   n <- nrow(X)
   m <- ncol(X)
