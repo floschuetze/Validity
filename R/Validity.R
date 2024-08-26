@@ -212,30 +212,29 @@ reg<-function(y, X) {
   return(model$fitted.values)
 }
 
-onlyconstant <- function(c,n) {
+Example1 <- function(c,n) {
   x <- rnorm(n, mean=0, sd=1)
   y <- rnorm(n, mean=0, sd=1)
   y[which(x>0)]<- y[which(x>0)]+c
   y[which(x<=0)]<- y[which(x<=0)]-c
-  p<-validity(x,y,reg,0,0,0,0)
+  p<-validity(x,y)
   return(p)
 }
 
-quadratic <- function(c,n) {
-  
+Example2 <- function(c,n) {
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=1)
-  p<-validity(x,y,reg,0,0,0,0)
+  p<-validity(x,y)
   return(p)
 }
 
-cobbdouglas <- function(c,n) {
+Example3 <- function(c,n) {
   
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
   mu<-c(0, 0) 
   LK<-as.matrix(mvrnorm(n=n, mu=mu, Sigma=sigma))
   y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=1)
-  p<-validity(LK,y,reg,0,0,0,0)
+  p<-validity(LK,y)
   return(p)
 }
