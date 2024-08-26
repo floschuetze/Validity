@@ -29,6 +29,8 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
   #'
   #'Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @author Florian Schuetze 26.08.2024
+   
+  
    #  Test for the validity of a regression model.
   # ---
   # Input:
@@ -55,7 +57,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
   if (missing(s)) s <- 0
   if (missing(l)) l <- 0
   if (missing(r)) r <- 0
-  if (missing(r)) N <- 1000
+  if (missing(N)) N <- 1000
   if (missing(reg)) reg <-function(y, X) {
     d<-data.frame(X,y1=y)
     model <- lm(y1 ~ ., data = d)
