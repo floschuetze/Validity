@@ -7,7 +7,7 @@
 validity(y, X, reg, v = 0, s = 0, l = 0, r = 0, N = 1000)
 }
 \arguments{
-\item{y}{Dependent variable, vector of (nx1)}
+\item{y}{Dependent variable, vector of (nx1) test}
 
 \item{X}{Regressors, can be either a vector (nx1) or a matrix (nxm) if there is more than one regressor}
 
