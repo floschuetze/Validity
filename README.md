@@ -14,6 +14,16 @@ Citation: *Frahm, Gabriel, A Test for the Validity of Regression Models
 <https://ssrn.com/abstract=4610329> or
 <http://dx.doi.org/10.2139/ssrn.4610329>
 
+## Disclaimer
+
+This package is a pre-alpha version. The execution time of the
+“validity” function in particular is still in need of improvement,
+especially if the aim is to run a comprehensive simulation. At present,
+it takes about 2.5 seconds to perform the validity test with n=100. With
+n=1000 you also need a lot of RAM. Please send comments, help and
+suggestions for improvement to [schuetze@hsu-hh.de](schuetze@hsu-hh.de).
+I really appreciate any suggestions for improvement!
+
 ## Installation
 
 You can install the development version of Validity from
@@ -70,10 +80,10 @@ validity(y,x)
 #> The validity test was successfully completed. 
 #> H0: The model is considerd to be valid. 
 #> H1: The model is not considered to be valid. 
-#> t-Value: 37.5298 
+#> t-Value: 21.87192 
 #> p-Value: 0
 #> $t_value
-#> [1] 37.5298
+#> [1] 21.87192
 #> 
 #> $p_value
 #> [1] 0
