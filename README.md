@@ -70,10 +70,10 @@ validity(y,x)
 #> The validity test was successfully completed. 
 #> H0: The model is considerd to be valid. 
 #> H1: The model is not considered to be valid. 
-#> t-Value: 140.2125 
+#> t-Value: 37.5298 
 #> p-Value: 0
 #> $t_value
-#> [1] 140.2125
+#> [1] 37.5298
 #> 
 #> $p_value
 #> [1] 0
@@ -85,8 +85,10 @@ validity(y,x)
 
 It is possible to specify your own regression function and pass it to
 the “validity” function. It is important that your custom function has
-as output the estimated values based on the custom regression for y. The
-default regression function is a simple OLS regression.
+as output the estimated values based on the custom regression for y.
+
+The following regression function is the default simple OLS regression
+used in the function “validity”.
 
 ``` r
 reg<-function(y, X) {
@@ -96,17 +98,52 @@ reg<-function(y, X) {
 }
 ```
 
-### Default Regression function
+### Example 1
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+The following function can be used to replicate the first example from
+the “A Test for the Validity of Regression Models” paper.
 
-You can also embed plots, for example:
+``` r
+#c and n must be specified; the function returns the p-value
+Example1 <- function(c,n) {
+  x <- rnorm(n, mean=0, sd=1)
+  y <- rnorm(n, mean=0, sd=1)
+  y[which(x>0)]<- y[which(x>0)]+c
+  y[which(x<=0)]<- y[which(x<=0)]-c
+  p<-validity(x,y)
+  return(p)
+}
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+### Example 2
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+The following function can be used to replicate the second example from
+the “A Test for the Validity of Regression Models” paper.
+
+``` r
+#c and n must be specified; the function returns the p-value
+Example2 <- function(c,n) {
+  x <- rnorm(n, mean=0, sd=1)
+  y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=1)
+  p<-validity(x,y)
+  return(p)
+}
+```
+
+### Example 3
+
+The following function can be used to replicate the third example from
+the “A Test for the Validity of Regression Models” paper.
+
+``` r
+#c and n must be specified; the function returns the p-value
+Example3 <- function(c,n) {
+  require(MASS)
+  sigma<-rbind(c(1,0.5), c(0.5,1))
+  mu<-c(0, 0) 
+  LK<-as.matrix(mvrnorm(n=n, mu=mu, Sigma=sigma))
+  y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=1)
+  p<-validity(LK,y)
+  return(p)
+}
+```

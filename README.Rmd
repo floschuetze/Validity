@@ -67,7 +67,7 @@ It is possible to specify your own regression function and pass it to the "valid
 
 The following regression function is the default simple OLS regression used in the function "validity".
 
-```{r functions, eval=FALSE}
+```{r reg, eval=FALSE}
 reg<-function(y, X) {
   d<-data.frame(X,y1=y)
   model <- lm(y1 ~ ., data = d)
@@ -80,7 +80,7 @@ reg<-function(y, X) {
 
 The following function can be used to replicate the first example from the "A Test for the Validity of Regression Models" paper. 
 
-```{r functions, eval=FALSE}
+```{r function1, eval=FALSE}
 #c and n must be specified; the function returns the p-value
 Example1 <- function(c,n) {
   x <- rnorm(n, mean=0, sd=1)
@@ -96,7 +96,7 @@ Example1 <- function(c,n) {
 
 The following function can be used to replicate the second example from the "A Test for the Validity of Regression Models" paper. 
 
-```{r functions, eval=FALSE}
+```{r function2, eval=FALSE}
 #c and n must be specified; the function returns the p-value
 Example2 <- function(c,n) {
   x <- rnorm(n, mean=0, sd=1)
@@ -110,7 +110,7 @@ Example2 <- function(c,n) {
 
 The following function can be used to replicate the third example from the "A Test for the Validity of Regression Models" paper. 
 
-```{r functions, eval=FALSE}
+```{r function3, eval=FALSE}
 #c and n must be specified; the function returns the p-value
 Example3 <- function(c,n) {
   require(MASS)
