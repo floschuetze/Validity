@@ -220,6 +220,8 @@ reg<-function(y, X) {
   #' y <- 10*x
   #' reg(y,x)
   #' @author Florian Schuetze 26.08.2024
+  #' @export
+
   d<-data.frame(X,y1=y)
   model <- lm(y1 ~ ., data = d)
   return(model$fitted.values)
@@ -237,6 +239,7 @@ Example1 <- function(c,n) {
   #' @author Florian Schuetze 26.08.2024
   #' @references 
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #'@export
   x <- rnorm(n, mean=0, sd=1)
   y <- rnorm(n, mean=0, sd=1)
   y[which(x>0)]<- y[which(x>0)]+c
@@ -257,6 +260,7 @@ Example2 <- function(c,n) {
   #' @author Florian Schuetze 26.08.2024
   #' @references 
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #'@export
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=1)
   p<-validity(x,y)
@@ -275,6 +279,7 @@ Example3 <- function(c,n) {
   #' @author Florian Schuetze 26.08.2024
   #' @references 
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #'@export
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
   mu<-c(0, 0) 
