@@ -251,7 +251,7 @@ Example1 <- function(c,n,tau) {
   y <- rnorm(n, mean=0, sd=tau)
   y[which(x>0)]<- y[which(x>0)]+c
   y[which(x<=0)]<- y[which(x<=0)]-c
-  p<-validity(x,y)
+  p<-validity(y,x,text=0)$p_value
   return(p)
 }
 
@@ -274,7 +274,7 @@ Example2 <- function(c,n,tau) {
 if (missing(tau)) tau <- 1
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=tau)
-  p<-validity(x,y)
+  p<-validity(y,x,text=0)$p_value
   return(p)
 }
 
@@ -299,6 +299,6 @@ Example3 <- function(c,n,tau) {
   mu<-c(0, 0) 
   LK<-as.matrix(mvrnorm(n=n, mu=mu, Sigma=sigma))
   y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=tau)
-  p<-validity(LK,y)
+  p<-validity(y,LK,text=0)$p_value
   return(p)
 }
