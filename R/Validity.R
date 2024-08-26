@@ -29,7 +29,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
   #'
   #'Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @author Florian Schuetze 26.08.2024
-   
+  #'@export
   
    #  Test for the validity of a regression model.
   # ---
@@ -219,6 +219,7 @@ reg<-function(y, X) {
   #' y <- 10*x
   #' reg(y,x)
   #' @author Florian Schuetze 26.08.2024
+  #'@export
   d<-data.frame(X,y1=y)
   model <- lm(y1 ~ ., data = d)
   return(model$fitted.values)
@@ -235,6 +236,7 @@ Example1 <- function(c,n) {
   #' Example1(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
+  #' @export
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   x <- rnorm(n, mean=0, sd=1)
   y <- rnorm(n, mean=0, sd=1)
@@ -255,6 +257,7 @@ Example2 <- function(c,n) {
   #' Example2(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
+  #' @export
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=1)
@@ -273,6 +276,7 @@ Example3 <- function(c,n) {
   #' Example3(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
+  #' @export
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
