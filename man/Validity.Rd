@@ -4,7 +4,7 @@
 \alias{validity}
 \title{Test for the Validity of Regression Models}
 \usage{
-validity(y, X, reg, v = 0, s = 0, l = 0, r = 0, N = 1000)
+validity(y, X, reg, v = 0, s = 0, l = 0, r = 0, N = 1000, text = 0)
 }
 \arguments{
 \item{y}{Dependent variable, vector of (nx1)}
@@ -24,6 +24,8 @@ v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The 
 \item{r}{(optional, default is r = 0) Controls how much weight is given to the right side of [0,1] of the beta distribution}
 
 \item{N}{(optional, default is N = 1000) The number of bootstrap replicates. Code may run faster if N<1000}
+
+\item{text}{(optional, default is text = 1) Either 0 or 1. If 0, output text is suppressed}
 }
 \value{
 The function returns the hypothesis to be tested. The t-value and p-value are also returned

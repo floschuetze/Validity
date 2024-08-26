@@ -1,5 +1,5 @@
 
-validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
+validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   #' Test for the Validity of Regression Models 
   #'
   #' It tests if a regression is valid. A specific regression can be specified for this, otherwise OLS is the default option.
@@ -13,6 +13,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
   #' @param l (optional, default is l = 0) Controls how much weight is given to the left side of [0,1] of the beta distribution
   #' @param r (optional, default is r = 0) Controls how much weight is given to the right side of [0,1] of the beta distribution
   #' @param N (optional, default is N = 1000) The number of bootstrap replicates. Code may run faster if N<1000
+  #' @param text (optional, default is text = 1) Either 0 or 1. If 0, output text is suppressed
   
   #' @details The "validity" function represents the fundamental component of the package. It performs a statistical test with the objective of determining the validity of a regression model that requires a dependent variable, which is represented as a vector of length "n". Additionally, it requires the regressors, which could be a vector or a matrix of length "m*n". By default, an OLS regression is run using a constant and all regressors to explain y. 
   #' @return The function returns the hypothesis to be tested. The t-value and p-value are also returned
@@ -59,6 +60,8 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
   if (missing(l)) l <- 0
   if (missing(r)) r <- 0
   if (missing(N)) N <- 1000
+  if (missing(text)) text <- 1
+  
   if (missing(reg)) reg <-function(y, X) {
     d<-data.frame(X,y1=y)
     model <- lm(y1 ~ ., data = d)
@@ -195,6 +198,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
     p = 1
   }else{
     p <- 1 - sum(T <= t) / N}
+  if (text ==1){
   message1 <- "The validity test was successfully completed."
   message2 <- "H0: The model is considerd to be valid."
   message3 <- "H1: The model is not considered to be valid."
@@ -204,7 +208,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
   cat(message3, "\n")
   cat("t-Value:", t, "\n")
   cat("p-Value:", p, "\n")
-  
+  }
   return(list(t_value = t, p_value = p))
 }
 
