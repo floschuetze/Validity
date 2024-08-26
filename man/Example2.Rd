@@ -21,7 +21,7 @@ This function replicates the second example of Frahm (2023)
 Example2(0.25,100)
 }
 \references{
-
+Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
 }
 \author{
 Florian Schuetze 26.08.2024

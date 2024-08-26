@@ -1,35 +1,36 @@
-validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
-  #' Test for the Validity of Regression Models 
-  #'
-  #' It tests if a regression is valid. A specific regression can be specified for this, otherwise OLS is the default option.
-  #' @param y Dependent variable, vector of (nx1)
-  #' @param X Regressors, can be either a vector (nx1) or a matrix (nxm) if there is more than one regressor
-  #' @param reg (optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example.
-  #' @param v (optional, default is v = 0) v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
-  #' 
-  #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
-  #' @param s (optional, default is s = 0) s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1
-  #' @param l (optional, default is l = 0) Controls how much weight is given to the left side of [0,1] of the beta distribution
-  #' @param r (optional, default is r = 0) Controls how much weight is given to the right side of [0,1] of the beta distribution
-  #' @param N (optional, default is N = 1000) The number of bootstrap replicates. Code may run faster if N<1000
+#' Test for the Validity of Regression Models 
+#'
+#' It tests if a regression is valid. A specific regression can be specified for this, otherwise OLS is the default option.
+#' @param y Dependent variable, vector of (nx1)
+#' @param X Regressors, can be either a vector (nx1) or a matrix (nxm) if there is more than one regressor
+#' @param reg (optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example.
+#' @param v (optional, default is v = 0) v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+#' 
+#' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
+#' @param s (optional, default is s = 0) s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1
+#' @param l (optional, default is l = 0) Controls how much weight is given to the left side of [0,1] of the beta distribution
+#' @param r (optional, default is r = 0) Controls how much weight is given to the right side of [0,1] of the beta distribution
+#' @param N (optional, default is N = 1000) The number of bootstrap replicates. Code may run faster if N<1000
 
-  #' @details The "validity" function represents the fundamental component of the package. It performs a statistical test with the objective of determining the validity of a regression model that requires a dependent variable, which is represented as a vector of length "n". Additionally, it requires the regressors, which could be a vector or a matrix of length "m*n". By default, an OLS regression is run using a constant and all regressors to explain y. 
-  #' @return The function returns the hypothesis to be tested. The t-value and p-value are also returned
-  #' @examples It is evident that the model "y=constant+beta*x" is valid.
-  #' x <- rnorm(100, mean=0, sd=1)
-  #' y <- 10*x
-  #' validity(y,x)
-  #' 
-  #' It is evident that the model "y=constant+beta*x" is not valid.
-  #' x <- rnorm(100, mean=0, sd=1)
-  #' y <- x^3-x^2
-  #' validity(y,x)
-  #' @references 
-  #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
-  #'
-  #'Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
-  #' @author Florian Schuetze 26.08.2024
-  #'@export
+#' @details The "validity" function represents the fundamental component of the package. It performs a statistical test with the objective of determining the validity of a regression model that requires a dependent variable, which is represented as a vector of length "n". Additionally, it requires the regressors, which could be a vector or a matrix of length "m*n". By default, an OLS regression is run using a constant and all regressors to explain y. 
+#' @return The function returns the hypothesis to be tested. The t-value and p-value are also returned
+#' @examples It is evident that the model "y=constant+beta*x" is valid.
+#' x <- rnorm(100, mean=0, sd=1)
+#' y <- 10*x
+#' validity(y,x)
+#' 
+#' It is evident that the model "y=constant+beta*x" is not valid.
+#' x <- rnorm(100, mean=0, sd=1)
+#' y <- x^3-x^2
+#' validity(y,x)
+#' @references 
+#'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+#'
+#'Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
+#' @author Florian Schuetze 26.08.2024
+#'@export
+validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000) {
+
   
    #  Test for the validity of a regression model.
   # ---
@@ -219,7 +220,6 @@ reg<-function(y, X) {
   #' y <- 10*x
   #' reg(y,x)
   #' @author Florian Schuetze 26.08.2024
-  #'@export
   d<-data.frame(X,y1=y)
   model <- lm(y1 ~ ., data = d)
   return(model$fitted.values)
@@ -236,7 +236,6 @@ Example1 <- function(c,n) {
   #' Example1(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
-  #' @export
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   x <- rnorm(n, mean=0, sd=1)
   y <- rnorm(n, mean=0, sd=1)
@@ -257,7 +256,6 @@ Example2 <- function(c,n) {
   #' Example2(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
-  #' @export
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=1)
@@ -276,7 +274,6 @@ Example3 <- function(c,n) {
   #' Example3(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
-  #' @export
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
