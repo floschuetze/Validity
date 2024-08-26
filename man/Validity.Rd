@@ -43,7 +43,7 @@ y <- x^3-x^2
 validity(y,x)
 }
 \references{
-Frahm, G.,2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
 
 Stute,W.,1997, Nonparametric model checks for regression, The Annals of Statistics 25, pp. 613 to 641.
 }
