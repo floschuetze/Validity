@@ -237,7 +237,7 @@ Example1 <- function(c,n,tau) {
   #' This function replicates the first example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
-  #' @param tau (optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ
+  #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error ϵ in the regression Y = g(X) + ϵ
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example1(0.25,100)
@@ -261,7 +261,7 @@ Example2 <- function(c,n,tau) {
   #' This function replicates the second example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
-  #' @param tau (optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ
+  #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error ϵ in the regression Y = g(X) + ϵ
 
   #' @return The function returns the p-value of the validity test.
   #' @examples 
@@ -284,7 +284,7 @@ Example3 <- function(c,n,tau) {
   #' This function replicates the third example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
-  #' @param tau (optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ
+  #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error ϵ in the regression Y = g(X) + ϵ
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example3(0.25,100)

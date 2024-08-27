@@ -11,7 +11,7 @@ Example3(c, n, tau)
 
 \item{n}{The number of observations}
 
-\item{tau}{(optional, default is tau = 1) tau is the variance of the error ϵ in the regression Y = g(X) + ϵ}
+\item{tau}{(optional, default is tau = 1) tau is the standard deviation of the error ϵ in the regression Y = g(X) + ϵ}
 }
 \value{
 The function returns the p-value of the validity test.
