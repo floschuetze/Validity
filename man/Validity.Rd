@@ -31,7 +31,7 @@ v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The 
 The function returns the hypothesis to be tested. The t-value and p-value are also returned
 }
 \description{
-It tests if a regression is valid. A specific regression can be specified for this, otherwise OLS is the default option.
+validity tests if a regression is valid. An own regression can be specified for this, otherwise OLS is the default option. The function returns the corresponding p-value and t-value.
 }
 \details{
 The "validity" function represents the fundamental component of the package. It performs a statistical test with the objective of determining the validity of a regression model that requires a dependent variable, which is represented as a vector of length "n". Additionally, it requires the regressors, which could be a vector or a matrix of length "m*n". By default, an OLS regression is run using a constant and all regressors to explain y.
