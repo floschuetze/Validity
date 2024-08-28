@@ -98,7 +98,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   interleaved <- interleaved[order(rep(1:nrow(X), each=m), rep(1:m, times=n))]
   Z2 <- matrix(rep(interleaved, n), nrow = n, byrow = TRUE)
   A<-Z1-Z2
-  
+  rm(repeated_rows,interleaved,Z1,Z2)
   
   
   
@@ -111,17 +111,17 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     
     C<-rbind(C,O)
   }
-  B<-C*-1
-  col_vector <- 1:n
   
-  k <- matrix(rep(col_vector, each = n), nrow = n, byrow = TRUE)
+  B<-C*-1
+rm(O,C)
+  k <- matrix(rep((1:n), each = n), nrow = n, byrow = TRUE)
   
   beta_pdf_values <- dbeta(((1:n) / n), shape1 = r + 1, shape2 = l + 1)
   
   w <- matrix(rep(beta_pdf_values, each = n), nrow = n, byrow = TRUE)
   K <- array(rep(1:n, n), dim = c(n, n, N))
   W <- array(rep(w, each = N), dim = c(dim(w), N))
-  
+  rm(beta_pdf_values)
   if (v == 0){
     C<-matrix(0,nrow=0,ncol=1)
     
@@ -130,6 +130,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
       o<-as.matrix(o)
       C<-rbind(C,o)
     }
+    rm(o)
     if (m>1){
       kkkk<-matrix(sqrt(rowSums(B[C, ]^2)), nrow = n,ncol=n, byrow = TRUE)
     }else{
@@ -140,7 +141,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     for (i in 1:ncol(kkkk)){
       I[,i]<-order(kkkk[,i])
     }
-    
+    rm(kkkk)
     d <- y-f
     e<-matrix(0,nrow=n,ncol=n)
     for (i in 1:n){
@@ -152,7 +153,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     }
     
     t <- mean(apply((w * g * g / k), 2, mean))
-    
+    rm(w,g,k)
     R <- array((Y - F), dim = c(n, 1, N))
 
     E <- array(R[matrix(I, n^2, 1),,], dim = c(n, n, N))
