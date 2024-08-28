@@ -13,11 +13,11 @@ validity(y, X, reg, v = 0, s = 0, l = 0, r = 0, N = 1000, text = 0)
 
 \item{reg}{(optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example.}
 
-\item{v}{(optional, default is v = 0) v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+\item{v}{(optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
 
 v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.}
 
-\item{s}{(optional, default is s = 0) s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1}
+\item{s}{(optional, default is s = 0) Either 0 or 1. s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1}
 
 \item{l}{(optional, default is l = 0) Controls how much weight is given to the left side of [0,1] of the beta distribution}
 
