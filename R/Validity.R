@@ -180,10 +180,10 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     cat(message1, "\n")
     cat(message2, "\n")
     cat(message3, "\n")
-    cat("t-Value:", t, "\n")
+
     cat("p-Value:", p, "\n")
   }
-  return(list(t_value = t, p_value = p))
+  return(list(p_value = p))
 }
 
 reg<-function(y, X) {
