@@ -11,7 +11,7 @@ validity(y, X, reg, v = 0, s = 0, l = 0, r = 0, N = 1000, text = 0)
 
 \item{X}{Regressors, can be either a vector (nx1) or a matrix (nxm) if there is more than one regressor}
 
-\item{reg}{(optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example.}
+\item{reg}{(optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example. Link: https://github.com/floschuetze/Validity}
 
 \item{v}{(optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
 
