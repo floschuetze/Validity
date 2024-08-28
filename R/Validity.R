@@ -15,7 +15,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   #' @param text (optional, default is text = 1) Either 0 or 1. If 0, output text is suppressed
   
   #' @details The "validity" function represents the fundamental component of the package. It performs a statistical test with the objective of determining the validity of a regression model that requires a dependent variable, which is represented as a vector of length "n". Additionally, it requires the regressors, which could be a vector or a matrix of length "m*n". By default, an OLS regression is run using a constant and all regressors to explain y. 
-  #' @return The function returns the hypothesis to be tested. The t-value and p-value are also returned
+  #' @return The function returns the hypothesis to be tested and the associated p-value.
   #' @examples It is evident that the model "y=constant+beta*x" is valid.
   #' x <- rnorm(100, mean=0, sd=1)
   #' y <- 10*x

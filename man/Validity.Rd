@@ -28,7 +28,7 @@ v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The 
 \item{text}{(optional, default is text = 1) Either 0 or 1. If 0, output text is suppressed}
 }
 \value{
-The function returns the hypothesis to be tested. The t-value and p-value are also returned
+The function returns the hypothesis to be tested and the associated p-value.
 }
 \description{
 validity tests if a regression is valid. An own regression can be specified for this purpose, otherwise OLS is the default option. The function returns the corresponding p-value and t-value.
