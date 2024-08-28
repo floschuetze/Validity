@@ -98,6 +98,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   }
   
   B<-C*-1
+  rm(O,C)
   k <- matrix(rep((1:n), each = n), nrow = n, byrow = TRUE)
   
   beta_pdf_values <- dbeta(((1:n) / n), shape1 = r + 1, shape2 = l + 1)
@@ -107,14 +108,9 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   W <- array(rep(w, each = N), dim = c(dim(w), N))
   rm(beta_pdf_values)
   if (v == 0){
-    C<-matrix(0,nrow=0,ncol=1)
-    
-    for (i in 1:n){
-      o<-seq(i,n*n,n)
-      o<-as.matrix(o)
-      C<-rbind(C,o)
-    }
-    rm(o)
+    C <- matrix(0, nrow = n, ncol = n)
+    C <- sapply(1:n, function(i) seq(i, n*n, n))
+    C <- matrix(as.vector(C), nrow = length(Cx), ncol = 1)
     if (m>1){
       kkkk<-matrix(sqrt(rowSums(B[C, ]^2)), nrow = n,ncol=n, byrow = TRUE)
     }else{
