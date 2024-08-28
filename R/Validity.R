@@ -110,7 +110,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   if (v == 0){
     C <- matrix(0, nrow = n, ncol = n)
     C <- sapply(1:n, function(i) seq(i, n*n, n))
-    C <- matrix(as.vector(C), nrow = length(Cx), ncol = 1)
+    C <- matrix(as.vector(C), nrow = length(C), ncol = 1)
     if (m>1){
       kkkk<-matrix(sqrt(rowSums(B[C, ]^2)), nrow = n,ncol=n, byrow = TRUE)
     }else{
