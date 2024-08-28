@@ -20,11 +20,14 @@ This package is a pre-alpha version. The execution time of the
 “validity” function in particular is still in need of improvement,
 especially if the aim is to run a comprehensive simulation. At present,
 it takes about 2.5 seconds to perform the validity test with n=100. With
-n=1000 you also need a lot of RAM. Comments, help, and suggestions for
-improvement are greatly appreciated at
-[schuetze@hsu-hh.de](schuetze@hsu-hh.de). Especially since R uses only
-one CPU core in standard mode, there is still potential for optimization
-(“parallel”, “foreach”, etc.).
+n\>=1000 or more than one regressor you also need a lot of RAM. In these
+cases, it is recommended to adjust the default bootstrap of N=1000 in
+the “validity” function (e.g. to N=100).
+
+Comments, help, and suggestions for improvement are greatly appreciated
+at [schuetze@hsu-hh.de](schuetze@hsu-hh.de). Especially since R uses
+only one CPU core in standard mode, there is still potential for
+optimization (“parallel”, “foreach”, etc.).
 
 ## Installation
 
@@ -82,10 +85,10 @@ validity(y,x)
 #> The validity test was successfully completed. 
 #> H0: The model is considerd to be valid. 
 #> H1: The model is not considered to be valid. 
-#> t-Value: 33.72371 
+#> t-Value: 25.92565 
 #> p-Value: 0
 #> $t_value
-#> [1] 33.72371
+#> [1] 25.92565
 #> 
 #> $p_value
 #> [1] 0
