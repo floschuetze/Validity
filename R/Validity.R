@@ -87,12 +87,17 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   Z2 <- matrix(rep(interleaved, n), nrow = n, byrow = TRUE)
   A<-Z1-Z2
   rm(Z1,Z2,interleaved)
+  O<-matrix(0,nrow=n,ncol=m)
+  C<-matrix(0,nrow=0,ncol=m)
   
+  for (ff in seq(1,ncol(A),m)){
+    for (j in 1:m){
+      O[,j]<-A[,(ff-1+j)]}
+    
+    C<-rbind(C,O)
+  }
   
-  
-  num_blocks <- ncol(A) / m
-
-  B <- matrix(as.vector(t(A)), nrow = n * num_blocks, ncol = 1)
+  B<-C*-1
   k <- matrix(rep((1:n), each = n), nrow = n, byrow = TRUE)
   
   beta_pdf_values <- dbeta(((1:n) / n), shape1 = r + 1, shape2 = l + 1)
