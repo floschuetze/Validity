@@ -1,4 +1,3 @@
-
 validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   #' Test for the Validity of Regression Models 
   #'
@@ -33,7 +32,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   #' @author Florian Schuetze 26.08.2024
   #'@export
   
-   #  Test for the validity of a regression model.
+  #  Test for the validity of a regression model.
   # ---
   # Input:
   # y (n x 1) - dependent variable
@@ -78,13 +77,13 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   E <- matrix(sample(Data, n * N, replace = TRUE), nrow = n, ncol = N)
   
   Y <- f + E
-
+  
   F <- matrix(0, nrow = n, ncol = N)
   for (i in 1:N) {
     F[, i] <- reg(Y[, i], X)
   }
   F <- apply(Y, 2, function(y) reg(y, X))
-
+  
   Z1 <- matrix(NA, nrow = n, ncol = m * n) 
   for (i in 1:n) {
     Z1[, (m * i - 1):(m * i)] <- X
@@ -98,7 +97,8 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   interleaved <- interleaved[order(rep(1:nrow(X), each=m), rep(1:m, times=n))]
   Z2 <- matrix(rep(interleaved, n), nrow = n, byrow = TRUE)
   A<-Z1-Z2
-
+  
+  
   
   
   O<-matrix(0,nrow=n,ncol=m)
@@ -110,15 +110,17 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     
     C<-rbind(C,O)
   }
-  
   B<-C*-1
-  k <- matrix(rep((1:n), each = n), nrow = n, byrow = TRUE)
+  col_vector <- 1:n
+  
+  k <- matrix(rep(col_vector, each = n), nrow = n, byrow = TRUE)
   
   beta_pdf_values <- dbeta(((1:n) / n), shape1 = r + 1, shape2 = l + 1)
   
   w <- matrix(rep(beta_pdf_values, each = n), nrow = n, byrow = TRUE)
   K <- array(rep(1:n, n), dim = c(n, n, N))
   W <- array(rep(w, each = N), dim = c(dim(w), N))
+  
   if (v == 0){
     C<-matrix(0,nrow=0,ncol=1)
     
@@ -137,6 +139,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     for (i in 1:ncol(kkkk)){
       I[,i]<-order(kkkk[,i])
     }
+    
     d <- y-f
     e<-matrix(0,nrow=n,ncol=n)
     for (i in 1:n){
@@ -148,8 +151,9 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     }
     
     t <- mean(apply((w * g * g / k), 2, mean))
+    
     R <- array((Y - F), dim = c(n, 1, N))
-
+    
     E <- array(R[matrix(I, n^2, 1),,], dim = c(n, n, N))
     
     G <- apply(E, c(2, 3), cumsum)
@@ -194,15 +198,15 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   }else{
     p <- 1 - sum(T <= t) / N}
   if (text ==1){
-  message1 <- "The validity test was successfully completed."
-  message2 <- "H0: The model is considerd to be valid."
-  message3 <- "H1: The model is not considered to be valid."
-  
-  cat(message1, "\n")
-  cat(message2, "\n")
-  cat(message3, "\n")
-  cat("t-Value:", t, "\n")
-  cat("p-Value:", p, "\n")
+    message1 <- "The validity test was successfully completed."
+    message2 <- "H0: The model is considerd to be valid."
+    message3 <- "H1: The model is not considered to be valid."
+    
+    cat(message1, "\n")
+    cat(message2, "\n")
+    cat(message3, "\n")
+    cat("t-Value:", t, "\n")
+    cat("p-Value:", p, "\n")
   }
   return(list(t_value = t, p_value = p))
 }
@@ -220,7 +224,7 @@ reg<-function(y, X) {
   #' reg(y,x)
   #' @author Florian Schuetze 26.08.2024
   #' @export
-
+  
   d<-data.frame(X,y1=y)
   model <- lm(y1 ~ ., data = d)
   return(model$fitted.values)
@@ -257,7 +261,7 @@ Example2 <- function(c,n,tau) {
   #' @param c A constant
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
-
+  
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example2(0.25,100)
@@ -266,7 +270,7 @@ Example2 <- function(c,n,tau) {
   #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'@export
   
-if (missing(tau)) tau <- 1
+  if (missing(tau)) tau <- 1
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=tau)
   p<-validity(y,x,text=0)$p_value
