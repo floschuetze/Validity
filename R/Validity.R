@@ -117,21 +117,14 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
       kkkk<-matrix(sqrt(B[C,1 ]^2), nrow = n,ncol=n, byrow = TRUE)
       
     }
-    I<-matrix(0,nrow=n,ncol=n)
-    for (i in 1:ncol(kkkk)){
-      I[,i]<-order(kkkk[,i])
-    }
+    I <- apply(kkkk, 2, order)
     rm(kkkk)
     d <- y-f
-    e<-matrix(0,nrow=n,ncol=n)
-    for (i in 1:n){
-      e[,i] = d[I[,i]]
-    }
-    g<-matrix(0,nrow=n,ncol=n)
-    for (i in 1:n){
-      g[,i] = cumsum(e[,i])
-    }
-    rm(e)
+    e <- matrix(d[I], nrow = n, ncol = n)
+    
+    g <- apply(e, 2, cumsum)
+    
+    
     t <- mean(apply((w * g * g / k), 2, mean))
     
     R <- array((Y - F), dim = c(n, 1, N))
