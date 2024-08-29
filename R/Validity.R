@@ -88,7 +88,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   A<-Z1-Z2
   rm(Z1,Z2,interleaved)
   
-  hhh<-cbind(rep(1:100, times = 100), rep(seq(1,ncol(A),m), each = 100))
+  hhh<-cbind(rep(1:n, times = n), rep(seq(1,ncol(A),m), each = n))
   O<-matrix(0,nrow=n*n,ncol=1)
   hhh1<-hhh
   for (y in 1:m){
