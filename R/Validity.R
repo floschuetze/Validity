@@ -87,17 +87,21 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   Z2 <- matrix(rep(interleaved, n), nrow = n, byrow = TRUE)
   A<-Z1-Z2
   rm(Z1,Z2,interleaved)
-  O<-matrix(0,nrow=n,ncol=m)
-  C<-matrix(0,nrow=0,ncol=m)
   
-  for (ff in seq(1,ncol(A),m)){
-    for (j in 1:m){
-      O[,j]<-A[,(ff-1+j)]}
-    
-    C<-rbind(C,O)
-  }
+  hhh<-cbind(rep(1:100, times = 100), rep(seq(1,ncol(A),m), each = 100))
+  O<-matrix(0,nrow=n*n,ncol=1)
+  hhh1<-hhh
+  for (y in 1:m){
+    hhh1[,2] <- hhh[, 2] + y-1
+    O<-apply(hhh1,1,function(x)A[x[1],x[2]])
+    if(y>1){
+      C<-cbind(C,O)
+    }else{
+      C<-O
+    }}
   
-  B<-C*-1
+  B<-as.matrix(C*-1)
+  
   rm(O,C)
   k <- matrix(rep((1:n), each = n), nrow = n, byrow = TRUE)
   
