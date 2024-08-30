@@ -72,7 +72,6 @@ reg<-function(y, X) {
 }
 ```
 
-
 ### Example 1
 
 The following function can be used to replicate the first example from the "A Test for the Validity of Regression Models" paper. 

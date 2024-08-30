@@ -63,8 +63,8 @@ x <- rnorm(100, mean=0, sd=1)
 y <- x^3-x^2 # true model
 validity(y,x) 
 #> The validity test was successfully completed. 
-#> H0: The model is considerd to be valid. 
-#> H1: The model is not considered to be valid. 
+#> H0: The regression model is valid. 
+#> H1: The regression model is invalid. 
 #> p-Value: 0
 #> $p_value
 #> [1] 0
