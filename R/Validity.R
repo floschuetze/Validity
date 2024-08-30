@@ -4,7 +4,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   #' validity tests if a regression is valid. An own regression can be specified for this purpose, otherwise OLS is the default option. The function returns the corresponding p-value and t-value.
   #' @param y Dependent variable, vector of (nx1)
   #' @param X Regressors, can be either a vector (nx1) or a matrix (nxm) if there is more than one regressor
-  #' @param reg (optional, default is OLS) It is possible to define your own regression function. The output of the function must be the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example. Link: https://github.com/floschuetze/Validity
+  #' @param reg (optional, default is OLS) It is possible to define your own regression function. The output of the function must be a vector of the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example. Link: https://github.com/floschuetze/Validity
   #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #' 
   #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
@@ -190,8 +190,8 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     p <- 1 - sum(T <= t) / N}
   if (text ==1){
     message1 <- "The validity test was successfully completed."
-    message2 <- "H0: The model is considerd to be valid."
-    message3 <- "H1: The model is not considered to be valid."
+    message2 <- "H0: The regression model is valid."
+    message3 <- "H1: The regression model is invalid."
     
     cat(message1, "\n")
     cat(message2, "\n")
@@ -218,7 +218,7 @@ reg<-function(y, X) {
   
   d<-data.frame(X,y1=y)
   model <- lm(y1 ~ ., data = d)
-  return(model$fitted.values)
+  return(as.vector(model$fitted.values))
 }
 
 Example1 <- function(c,n,tau) {
