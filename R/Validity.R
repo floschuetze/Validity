@@ -70,58 +70,39 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   X<-as.matrix(X)
   n <- nrow(X)
   m <- ncol(X)
-  
   f <- reg(y, X)
   Data <- (y - f) - mean(y - f)
-  
   E <- matrix(sample(Data, n * N, replace = TRUE), nrow = n, ncol = N)
+  
   rm(Data)
   Y <- f + E
-  
   F <- apply(Y, 2, function(y) reg(y, X))
-  
   Z1 <- matrix(rep(X, m), nrow = n, ncol = m * n)
-  
   interleaved <- as.vector(t(X))[order(rep(1:nrow(X), each=m), rep(1:m, times=n))]
-  
   Z2 <- matrix(rep(interleaved, n), nrow = n, byrow = TRUE)
   A<-Z1-Z2
+  
   rm(Z1,Z2,interleaved)
-  O<-matrix(0,nrow=n,ncol=m)
-  C<-matrix(0,nrow=0,ncol=m)
+  hhh<-cbind(rep(1:n, times = n), rep(seq(1,ncol(A),m), each = n))
+  O<-matrix(0,nrow=n*n,ncol=1)
+  hhh1<-hhh
+  for (i in 1:m){
+    hhh1[,2] <- hhh[, 2] + i-1
+    O<-apply(hhh1,1,function(x)A[x[1],x[2]])
+    if(i>1){
+      C<-cbind(C,O)
+    }else{
+      C<-O
+    }}
+  B<-as.matrix(C*-1)
   
-  for (ff in seq(1,ncol(A),m)){
-    for (j in 1:m){
-      O[,j]<-A[,(ff-1+j)]}
-    
-    C<-rbind(C,O)
-  }
-  
-  B<-C*-1
-  rm(O,C)
-  
-  # hhh<-cbind(rep(1:n, times = n), rep(seq(1,ncol(A),m), each = n))
-  # O<-matrix(0,nrow=n*n,ncol=1)
-  # hhh1<-hhh
-  # for (y in 1:m){
-  #   hhh1[,2] <- hhh[, 2] + y-1
-  #   O<-apply(hhh1,1,function(x)A[x[1],x[2]])
-  #   if(y>1){
-  #     C<-cbind(C,O)
-  #   }else{
-  #     C<-O
-  #   }}
-  # 
-  # B<-as.matrix(C*-1)
-  # 
-  # rm(O,C)
+  rm(O,C,hhh,hhh1)
   k <- matrix(rep((1:n), each = n), nrow = n, byrow = TRUE)
-  
   beta_pdf_values <- dbeta(((1:n) / n), shape1 = r + 1, shape2 = l + 1)
-  
   w <- matrix(rep(beta_pdf_values, each = n), nrow = n, byrow = TRUE)
   K <- array(rep(1:n, n), dim = c(n, n, N))
   W <- array(rep(w, each = N), dim = c(dim(w), N))
+  
   rm(beta_pdf_values)
   if (v == 0){
     C <- matrix(0, nrow = n, ncol = n)
@@ -131,45 +112,28 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
       kkkk<-matrix(sqrt(rowSums(B[C, ]^2)), nrow = n,ncol=n, byrow = TRUE)
     }else{
       kkkk<-matrix(sqrt(B[C,1 ]^2), nrow = n,ncol=n, byrow = TRUE)
-      
     }
     I <- apply(kkkk, 2, order)
+    
     rm(kkkk)
     d <- y-f
     e <- matrix(d[I], nrow = n, ncol = n)
-    
     g <- apply(e, 2, cumsum)
-    
-    
     t <- mean(apply((w * g * g / k), 2, mean))
-    
     R <- array((Y - F), dim = c(n, 1, N))
-    
     E <- array(R[matrix(I, n^2, 1),,], dim = c(n, n, N))
-    
     G <- apply(E, c(2, 3), cumsum)
-    
-    
     T <- apply(apply(((W * G * G) / K), c(1, 3), mean),2,mean)
   } else if (v == 1){
     I <- array(rowSums(B <= 0) == m, dim = c(n, n))
-    
     e <- matrix(rep(y - f, n), nrow = length(y), ncol = n)
     e[I] <- 0
-    
     Ex <- array((Y - F), dim = c(nrow(Y - F), 1, ncol(Y - F)))
-    
     E <- aperm(array(rep(Ex, each = n), dim = c(dim(Ex)[1], n, dim(Ex)[3])), c(2, 1, 3))
     E[array(I, dim = c(nrow(I), ncol(I), N))]=0
-    
-    
     if (s == 0) {
       t <- sum(colSums(e)^2) / n^2
-      
       T <- colSums(apply(E, c(3), function(x) colSums(x))^2, dims = 1)/n^2
-      
-      
-      
     } else if (s == 1) {
       t <- max(abs(colSums(e)))
       T<-apply(abs(apply(E, c(3), function(x) colSums(x))),2,max)
@@ -181,8 +145,6 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     print("Error:Test version not properly specified!")
   }
   
-  
-  
   if (t <= .Machine$double.eps){
     t = 0
     p = 1
@@ -192,11 +154,9 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
     message1 <- "The validity test was successfully completed."
     message2 <- "H0: The regression model is valid."
     message3 <- "H1: The regression model is invalid."
-    
     cat(message1, "\n")
     cat(message2, "\n")
     cat(message3, "\n")
-
     cat("p-Value:", p, "\n")
   }
   return(list(p_value = p))
