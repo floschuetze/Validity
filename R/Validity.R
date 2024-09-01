@@ -88,7 +88,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   hhh1<-hhh
   for (i in 1:m){
     hhh1[,2] <- hhh[, 2] + i-1
-    O<-apply(hhh1,1,function(x)A[x[1],x[2]])
+    O <- A[hhh1]
     if(i>1){
       C<-cbind(C,O)
     }else{
