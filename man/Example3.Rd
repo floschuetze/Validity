@@ -4,7 +4,7 @@
 \alias{Example3}
 \title{The third example of Frahm (2023)}
 \usage{
-Example3(c, n, tau)
+Example3(c, n, tau, N)
 }
 \arguments{
 \item{c}{A constant}
@@ -12,6 +12,8 @@ Example3(c, n, tau)
 \item{n}{The number of observations}
 
 \item{tau}{(optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e}
+
+\item{N}{(optional, default is N = 1000) N is the number of bootstrap replications in the validity function}
 }
 \value{
 The function returns the p-value of the validity test.

@@ -221,13 +221,14 @@ reg<-function(y, X) {
   return(as.vector(model$fitted.values))
 }
 
-Example1 <- function(c,n,tau) {
+Example1 <- function(c,n,tau,N) {
   #' The first example of Frahm (2023)
   #'
   #' This function replicates the first example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
+  #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example1(0.25,100)
@@ -237,22 +238,24 @@ Example1 <- function(c,n,tau) {
   #'@export
   
   if (missing(tau)) tau <- 1
+  if (missing(N)) N <- 1000
+  
   x <- rnorm(n, mean=0, sd=1)
   y <- rnorm(n, mean=0, sd=tau)
   y[which(x>0)]<- y[which(x>0)]+c
   y[which(x<=0)]<- y[which(x<=0)]-c
-  p<-validity(y,x,text=0)$p_value
+  p<-validity(y,x,N=N,text=0)$p_value
   return(p)
 }
 
-Example2 <- function(c,n,tau) {
+Example2 <- function(c,n,tau,N) {
   #' The second example of Frahm (2023)
   #'
   #' This function replicates the second example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
-  
+  #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example2(0.25,100)
@@ -262,19 +265,21 @@ Example2 <- function(c,n,tau) {
   #'@export
   
   if (missing(tau)) tau <- 1
+  if (missing(N)) N <- 1000
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=tau)
-  p<-validity(y,x,text=0)$p_value
+  p<-validity(y,x,N=N,text=0)$p_value
   return(p)
 }
 
-Example3 <- function(c,n,tau) {
+Example3 <- function(c,n,tau,N) {
   #' The third example of Frahm (2023)
   #'
   #' This function replicates the third example of Frahm (2023)
   #' @param c A constant
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
+  #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example3(0.25,100)
@@ -284,11 +289,12 @@ Example3 <- function(c,n,tau) {
   #'@export
   
   if (missing(tau)) tau <- 1
+  if (missing(N)) N <- 1000
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
   mu<-c(0, 0) 
   LK<-as.matrix(mvrnorm(n=n, mu=mu, Sigma=sigma))
   y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=tau)
-  p<-validity(y,LK,text=0)$p_value
+  p<-validity(y,LK,N=N,text=0)$p_value
   return(p)
 }
