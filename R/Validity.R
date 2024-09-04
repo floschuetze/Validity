@@ -181,7 +181,7 @@ reg<-function(y, X) {
   return(as.vector(model$fitted.values))
 }
 
-Example1 <- function(c,n,tau,N) {
+Example1 <- function(c,n,tau,N,v) {
   #' The first example of Frahm (2023)
   #'
   #' This function replicates the first example of Frahm (2023)
@@ -199,16 +199,17 @@ Example1 <- function(c,n,tau,N) {
   
   if (missing(tau)) tau <- 1
   if (missing(N)) N <- 1000
+  if (missing(v)) v <- 0
   
   x <- rnorm(n, mean=0, sd=1)
   y <- rnorm(n, mean=0, sd=tau)
   y[which(x>0)]<- y[which(x>0)]+c
   y[which(x<=0)]<- y[which(x<=0)]-c
-  p<-validity(y,x,N=N,text=0)$p_value
+  p<-validity(y,x,v=v,N=N,text=0)$p_value
   return(p)
 }
 
-Example2 <- function(c,n,tau,N) {
+Example2 <- function(c,n,tau,N,v) {
   #' The second example of Frahm (2023)
   #'
   #' This function replicates the second example of Frahm (2023)
@@ -226,13 +227,15 @@ Example2 <- function(c,n,tau,N) {
   
   if (missing(tau)) tau <- 1
   if (missing(N)) N <- 1000
+  if (missing(v)) v <- 0
+  
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=tau)
-  p<-validity(y,x,N=N,text=0)$p_value
+  p<-validity(y,x,v=v,N=N,text=0)$p_value
   return(p)
 }
 
-Example3 <- function(c,n,tau,N) {
+Example3 <- function(c,n,tau,N,v) {
   #' The third example of Frahm (2023)
   #'
   #' This function replicates the third example of Frahm (2023)
@@ -250,11 +253,13 @@ Example3 <- function(c,n,tau,N) {
   
   if (missing(tau)) tau <- 1
   if (missing(N)) N <- 1000
+  if (missing(v)) v <- 0
+  
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
   mu<-c(0, 0) 
   LK<-as.matrix(mvrnorm(n=n, mu=mu, Sigma=sigma))
   y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=tau)
-  p<-validity(y,LK,N=N,text=0)$p_value
+  p<-validity(y,LK,v=v,N=N,text=0)$p_value
   return(p)
 }
