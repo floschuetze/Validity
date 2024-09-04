@@ -189,6 +189,9 @@ Example1 <- function(c,n,tau,N,v) {
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
   #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
+  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' 
+  #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example1(0.25,100)
@@ -217,6 +220,9 @@ Example2 <- function(c,n,tau,N,v) {
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
   #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
+  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' 
+  #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example2(0.25,100)
@@ -243,6 +249,9 @@ Example3 <- function(c,n,tau,N,v) {
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
   #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
+  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' 
+  #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @return The function returns the p-value of the validity test.
   #' @examples 
   #' Example3(0.25,100)

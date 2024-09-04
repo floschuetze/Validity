@@ -10,9 +10,8 @@ The goal of the “Validity” package is to implement the method of the
 paper “A Test for the Validity of Regression Models”.
 
 Citation: *Frahm, Gabriel, A Test for the Validity of Regression Models
-(October 23, 2023). Available on SSRN:*
-<https://ssrn.com/abstract=4610329> or
-<http://dx.doi.org/10.2139/ssrn.4610329>
+(July 3, 2024). Available on SSRN:* <https://ssrn.com/abstract=4610329>
+or <http://dx.doi.org/10.2139/ssrn.4610329>
 
 ## Disclaimer
 
@@ -96,15 +95,16 @@ The following function can be used to replicate the first example from
 the “A Test for the Validity of Regression Models” paper.
 
 ``` r
-#c and n must be specified; the function returns the p-value; tau and N is optional
-Example1 <- function(c,n,tau,N) {
+#c and n must be specified; the function returns the p-value; tau, N and v is optional
+Example1 <- function(c,n,tau,N,v) {
   if (missing(tau)) tau <- 1
   if (missing(N)) N <- 1000
+  if (missing(v)) v <- 0
   x <- rnorm(n, mean=0, sd=1)
   y <- rnorm(n, mean=0, sd=tau)
   y[which(x>0)]<- y[which(x>0)]+c
   y[which(x<=0)]<- y[which(x<=0)]-c
-  p<-validity(y,x,N=N,text=0)$p_value
+  p<-validity(y,x,v=v,N=N,text=0)$p_value
   return(p)
 }
 ```
@@ -115,13 +115,14 @@ The following function can be used to replicate the second example from
 the “A Test for the Validity of Regression Models” paper.
 
 ``` r
-#c and n must be specified; the function returns the p-value; tau and N is optional
-Example2 <- function(c,n,tau,N) {
+#c and n must be specified; the function returns the p-value; tau, N and v is optional
+Example2 <- function(c,n,tau,N,v) {
   if (missing(tau)) tau <- 1
   if (missing(N)) N <- 1000
+  if (missing(v)) v <- 0
   x <- rnorm(n, mean=0, sd=1)
   y<-(-1)+x+c*((x^2)-1)+rnorm(n, mean=0, sd=tau)
-  p<-validity(y,x,N=N,text=0)$p_value
+  p<-validity(y,x,v=v,N=N,text=0)$p_value
   return(p)
 }
 ```
@@ -132,16 +133,17 @@ The following function can be used to replicate the third example from
 the “A Test for the Validity of Regression Models” paper.
 
 ``` r
-#c and n must be specified; the function returns the p-value; tau and N is optional
+#c and n must be specified; the function returns the p-value; tau, N and v is optional
 Example3 <- function(c,n,tau,N) {
   if (missing(tau)) tau <- 1
   if (missing(N)) N <- 1000
+  if (missing(v)) v <- 0
   require(MASS)
   sigma<-rbind(c(1,0.5), c(0.5,1))
   mu<-c(0, 0) 
   LK<-as.matrix(mvrnorm(n=n, mu=mu, Sigma=sigma))
   y<-0.25*LK[,1]+0.75*LK[,2]+c*LK[,1]*LK[,2]+rnorm(n, mean=0, sd=tau)
-  p<-validity(y,LK,N=N,text=0)$p_value
+  p<-validity(y,LK,v=v,N=N,text=0)$p_value
   return(p)
 }
 ```
