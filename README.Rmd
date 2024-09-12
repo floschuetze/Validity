@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 The goal of the "Validity" package is to implement the method of the paper "A Test for the Validity of Regression Models". 
 
 Citation: 
-*Frahm, Gabriel, A Test for the Validity of Regression Models (July 3, 2024). Available on SSRN:*
+*Frahm, Gabriel, A Test for the Validity of Regression Models (2024). Available on SSRN:*
 <https://ssrn.com/abstract=4610329> or <http://dx.doi.org/10.2139/ssrn.4610329>
 
 ## Disclaimer

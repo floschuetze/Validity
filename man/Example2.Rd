@@ -2,9 +2,9 @@
 % Please edit documentation in R/Validity.R
 \name{Example2}
 \alias{Example2}
-\title{The second example of Frahm (2023)}
+\title{The second example of Frahm (2024)}
 \usage{
-Example2(c, n, tau, N)
+Example2(c, n, tau, N, v)
 }
 \arguments{
 \item{c}{A constant}
@@ -14,18 +14,22 @@ Example2(c, n, tau, N)
 \item{tau}{(optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e}
 
 \item{N}{(optional, default is N = 1000) N is the number of bootstrap replications in the validity function}
+
+\item{v}{(optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+
+v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.}
 }
 \value{
 The function returns the p-value of the validity test.
 }
 \description{
-This function replicates the second example of Frahm (2023)
+This function replicates the second example of Frahm (2024)
 }
 \examples{
 Example2(0.25,100)
 }
 \references{
-Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
 }
 \author{
 Florian Schuetze 26.08.2024

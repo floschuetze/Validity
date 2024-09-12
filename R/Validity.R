@@ -5,7 +5,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   #' @param y Dependent variable, vector of (nx1)
   #' @param X Regressors, can be either a vector (nx1) or a matrix (nxm) if there is more than one regressor
   #' @param reg (optional, default is OLS) It is possible to define your own regression function. The output of the function must be a vector of the fitted values. The input must be the dependent variable and the independent variables. See the function "reg" in the readme file as an example. Link: https://github.com/floschuetze/Validity
-  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #' 
   #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @param s (optional, default is s = 0) Either 0 or 1. s = 0: Cramer-von-Mises; s = 1: Kolmogorov-Smirnov; This does only matter for v = 1
@@ -26,7 +26,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   #' y <- x^3-x^2
   #' validity(y,x)
   #' @references 
-  #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #'Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'
   #'Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @author Florian Schuetze 26.08.2024
@@ -182,14 +182,14 @@ reg<-function(y, X) {
 }
 
 Example1 <- function(c,n,tau,N,v) {
-  #' The first example of Frahm (2023)
+  #' The first example of Frahm (2024)
   #'
-  #' This function replicates the first example of Frahm (2023)
+  #' This function replicates the first example of Frahm (2024)
   #' @param c A constant
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
   #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
-  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #' 
   #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @return The function returns the p-value of the validity test.
@@ -197,7 +197,7 @@ Example1 <- function(c,n,tau,N,v) {
   #' Example1(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
-  #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #'Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'@export
   
   if (missing(tau)) tau <- 1
@@ -213,14 +213,14 @@ Example1 <- function(c,n,tau,N,v) {
 }
 
 Example2 <- function(c,n,tau,N,v) {
-  #' The second example of Frahm (2023)
+  #' The second example of Frahm (2024)
   #'
-  #' This function replicates the second example of Frahm (2023)
+  #' This function replicates the second example of Frahm (2024)
   #' @param c A constant
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
   #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
-  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #' 
   #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @return The function returns the p-value of the validity test.
@@ -228,7 +228,7 @@ Example2 <- function(c,n,tau,N,v) {
   #' Example2(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
-  #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #'Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'@export
   
   if (missing(tau)) tau <- 1
@@ -242,14 +242,14 @@ Example2 <- function(c,n,tau,N,v) {
 }
 
 Example3 <- function(c,n,tau,N,v) {
-  #' The third example of Frahm (2023)
+  #' The third example of Frahm (2024)
   #'
-  #' This function replicates the third example of Frahm (2023)
+  #' This function replicates the third example of Frahm (2024)
   #' @param c A constant
   #' @param n The number of observations
   #' @param tau (optional, default is tau = 1) tau is the standard deviation of the error e in the regression Y = g(X) + e
   #' @param N (optional, default is N = 1000) N is the number of bootstrap replications in the validity function
-  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #' @param v (optional, default is v = 0) Either 0 or 1. v = 0: Validity-Test from Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #' 
   #' v = 1: Test from Stute,W., 1997, Nonparametric model checks for regression. The Annals of Statistics 25, pp. 613 to 641.
   #' @return The function returns the p-value of the validity test.
@@ -257,7 +257,7 @@ Example3 <- function(c,n,tau,N,v) {
   #' Example3(0.25,100)
   #' @author Florian Schuetze 26.08.2024
   #' @references 
-  #'Frahm, G., 2023, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
+  #'Frahm, G., 2024, A Test for the Validity of Regression Models. Available on SSRN: https://ssrn.com/abstract=4610329
   #'@export
   
   if (missing(tau)) tau <- 1
