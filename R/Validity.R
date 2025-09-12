@@ -77,7 +77,7 @@ validity <- function(y, X, reg, v = 0, s = 0,l=0,r=0,N=1000,text=0) {
   rm(Data)
   Y <- f + E
   F <- apply(Y, 2, function(y) reg(y, X))
-  Z1 <- matrix(rep(X, m), nrow = n, ncol = m * n)
+  Z1 <- matrix(rep(X, m), nrow = n, ncol = (m^2 * n))[,1:(m*n)]
   interleaved <- as.vector(t(X))[order(rep(1:nrow(X), each=m), rep(1:m, times=n))]
   Z2 <- matrix(rep(interleaved, n), nrow = n, byrow = TRUE)
   A<-Z1-Z2
